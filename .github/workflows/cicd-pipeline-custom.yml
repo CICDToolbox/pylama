@@ -23,6 +23,20 @@ jobs:
 #
 # End of Template (part 1)
 #
+  build-testing:
+    strategy:
+      matrix:
+        python: [ '3.7', '3.8', '3.9', '3.10' ]
+    name: Build Test on Python ${{ matrix.python }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Run Bandit
+        run: ./pipeline.sh
 
 #
 # Start of Template (part 2)
@@ -32,7 +46,7 @@ jobs:
     if: always()
     name: Slack Post Workflow Notification
     needs:
-      - build
+      - build-testing
     runs-on: ubuntu-latest
     steps:
       - name: Slack Workflow Notifications
