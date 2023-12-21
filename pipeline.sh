@@ -26,7 +26,7 @@ set -Eeuo pipefail
 # CURRENT_STAGE - The current stage used for the reporting output.                 #
 # -------------------------------------------------------------------------------- #
 
-INSTALL_COMMAND="pip install pylama"
+INSTALL_COMMAND="pip install setuptools pylama"
 
 TEST_COMMAND='pylama'
 FILE_TYPE_SEARCH_PATTERN='^Python script'
